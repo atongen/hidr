@@ -30,7 +30,7 @@ module Cript
     end
 
     def inspect
-      "#<#{self.class.name} public_key_path=#{@opt[:public_key_path]} type=#{type} size=#{size} fingerprint=#{fingerprint} comment=#{comment}>"
+      "#<#{self.class.name} path=#{@opt[:public_key_path]}>"
     end
 
     def type
@@ -54,7 +54,7 @@ module Cript
         message.
         bytes.
         each_slice((size / 8) - 11).
-        map { |chunk| public_key.public_encrypt(chunk.pack('C*')) }.
+        map { |chunk| @public_key.public_encrypt(chunk.pack('C*')) }.
         join)
     end
 
@@ -62,7 +62,7 @@ module Cript
       Base64::decode64(message).
         bytes.
         each_slice(size / 8).
-        map { |chunk| private_key.private_decrypt(chunk.pack('C*')) }.
+        map { |chunk| @private_key.private_decrypt(chunk.pack('C*')) }.
         join
     end
 

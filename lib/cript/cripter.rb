@@ -27,6 +27,13 @@ module Cript
           @opt[:public_key_path] = "#{ENV['HOME']}/.ssh/id_rsa.pub"
         end
       end
+
+      if [:private_key_content, :private_key_path].any? { |o| @opt[o] }
+        @private_key = OpenSSL::PKey::RSA.new(*[private_key_content, @opt.delete(:passphrase)])
+      end
+      if [:public_key_content, :public_key_path].any? { |o| @opt[o] }
+        @public_key = OpenSSL::PKey::RSA.new(public_key_content)
+      end
     end
 
     def inspect
@@ -46,18 +53,6 @@ module Cript
     end
 
     private
-
-    def private_key
-      @private_key ||= begin
-        OpenSSL::PKey::RSA.new(*[private_key_content, @opt.delete(:passphrase)])
-      end
-    end
-
-    def public_key
-      @public_key ||= begin
-        OpenSSL::PKey::RSA.new(public_key_content)
-      end
-    end
 
     def private_key_content
       if @opt[:private_key_content]

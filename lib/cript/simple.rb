@@ -14,13 +14,13 @@ module Cript
       key = cipher.random_key
       iv = cipher.random_iv
       encrypted_message = cipher.update(message) + cipher.final
-      encrypted_key = public_key.public_encrypt(key)
+      encrypted_key = @public_key.public_encrypt(key)
       Base64::encode64(Marshal.dump([encrypted_key,iv,encrypted_message]))
     end
 
     def decrypt(message)
       encrypted_key, iv, encrypted_message = Marshal.load(Base64::decode64(message))
-      key = private_key.private_decrypt(encrypted_key)
+      key = @private_key.private_decrypt(encrypted_key)
       cipher = OpenSSL::Cipher::Cipher.new('bf-cbc').decrypt
       cipher.key = key
       cipher.iv = iv

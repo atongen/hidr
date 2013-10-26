@@ -12,11 +12,13 @@ module Cript
     # public_key_path
     # private_key_path
     # passphrase
+    # thread_safe
     def initialize(file, options = {})
       @opt = options
       crypt_class = options.delete(:crypt_class) || Cript::Simple
       @crypt = crypt_class.new(options)
-      super(file, true)
+      thread_safe = !!options.delete(:thread_safe)
+      super(file, thread_safe)
     end
 
     def inspect
