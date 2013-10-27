@@ -2,6 +2,8 @@
 
 Simple Encryption Tools for Ruby
 
+[![Build Status](https://travis-ci.org/atongen/cript.png)](https://travis-ci.org/atongen/cript)
+
 ## Installation
 
 Add this line to your application's Gemfile:
