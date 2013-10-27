@@ -78,6 +78,9 @@ result = h.hide('Wow!')
 
 After running this code, result will contain "zzzazazazzzzazzazzzazzzazaaaazaa".
 
+It comes with a few commonly used mappings already setup: ascii, unicode, orly.
+Call the class method of the same name to get these hidrs.
+
 ## Contributing
 
 1. Fork it
