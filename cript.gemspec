@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Cript::VERSION
   spec.authors       = ["Andrew Tongen"]
   spec.email         = ["atongen@gmail.com"]
-  spec.description   = %q{Simple encryption tools}
-  spec.summary       = %q{Simple encryption tools}
-  spec.homepage      = ""
+  spec.description   = %q{Simple Encryption Tools for Ruby}
+  spec.summary       = %q{Simple Encryption Tools for Ruby}
+  spec.homepage      = "https://github.com/atongen/cript"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

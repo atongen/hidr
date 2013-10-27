@@ -2,25 +2,42 @@
 require 'spec_helper'
 
 describe Cript::Hidr do
-  let(:hidr) { Cript::Hidr.new }
-  let(:small_ascii) { SecureRandom.base64 }
-  let(:small_bytes) { SecureRandom.random_bytes }
-  let(:big_ascii) { SecureRandom.base64(102400) }
-  let(:big_bytes) { SecureRandom.random_bytes(102400) }
+  let(:ascii) { SecureRandom.base64(10240) }
+  let(:bytes) { SecureRandom.random_bytes(10240) }
 
-  it 'should echo small ascii' do
-    hidr.e(small_ascii).should eql(small_ascii)
+  context "ascii out" do
+    let(:hidr) { Cript::Hidr.ascii }
+
+    it 'should echo ascii' do
+      hidr.e(ascii).should eql(ascii)
+    end
+
+    it 'should echo bytes' do
+      hidr.e(bytes).should eql(bytes)
+    end
   end
 
-  it 'should echo small bytes' do
-    hidr.e(small_bytes).should eql(small_bytes)
+  context "unicode out" do
+    let(:hidr) { Cript::Hidr.unicode }
+
+    it 'should echo ascii' do
+      hidr.e(ascii).should eql(ascii)
+    end
+
+    it 'should echo bytes' do
+      hidr.e(bytes).should eql(bytes)
+    end
   end
 
-  it 'should echo big ascii' do
-    hidr.e(big_ascii).should eql(big_ascii)
-  end
+  context "orly out" do
+    let(:hidr) { Cript::Hidr.orly }
 
-  it 'should echo big bytes' do
-    hidr.e(big_bytes).should eql(big_bytes)
+    it 'should echo ascii' do
+      hidr.e(ascii).should eql(ascii)
+    end
+
+    it 'should echo bytes' do
+      hidr.e(bytes).should eql(bytes)
+    end
   end
 end

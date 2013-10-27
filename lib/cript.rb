@@ -9,6 +9,6 @@ end
 require "cript/cripter"
 require "cript/simple"
 require "cript/naive"
-require "cript/estore"
+require "cript/store"
 require "cript/ehash"
 require "cript/hidr"

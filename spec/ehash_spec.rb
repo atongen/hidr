@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'fileutils'
 
 describe Cript::EHash do
-  let(:file) { '/tmp/cript-spec.estore' }
+  let(:file) { '/tmp/cript-spec.store' }
 
   before(:each) do
     FileUtils.rm(file) if File.file?(file)

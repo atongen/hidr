@@ -1,13 +1,13 @@
 #
-# Cript::EStore
+# Cript::Store
 #
 require 'pstore'
 require 'cript/simple'
 
 module Cript
-  # Cript::EStore provides the same functionality as PStore, except it encrypts
+  # Cript::Store provides the same functionality as PStore, except it encrypts
   # its data store on the file system.
-  class EStore < ::PStore
+  class Store < ::PStore
 
     # public_key_path
     # private_key_path

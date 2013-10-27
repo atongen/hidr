@@ -10,6 +10,8 @@ module Cript
 
     class Error < StandardError; end
 
+    # Build a new cripter
+    #
     # Options:
     # public_key_content
     # private_key_content
@@ -29,10 +31,10 @@ module Cript
       end
 
       if [:private_key_content, :private_key_path].any? { |o| @opt[o] }
-        @private_key = OpenSSL::PKey::RSA.new(*[private_key_content, @opt.delete(:passphrase)])
+        @private_key = OpenSSL::PKey::RSA.new(*[key_content(:private), @opt.delete(:passphrase)])
       end
       if [:public_key_content, :public_key_path].any? { |o| @opt[o] }
-        @public_key = OpenSSL::PKey::RSA.new(public_key_content)
+        @public_key = OpenSSL::PKey::RSA.new(key_content)
       end
     end
 
@@ -54,33 +56,19 @@ module Cript
 
     private
 
-    def private_key_content
-      if @opt[:private_key_content]
-        @opt[:private_key_content]
-      elsif @opt[:private_key_path]
-        content = File.read(@opt[:private_key_path])
-        if content.include?("PRIVATE KEY")
+    def key_content(type = :public)
+      type = :private unless type == :public
+      if @opt[:"#{type}_key_content"]
+        @opt[:"#{type}_key_content"]
+      elsif @opt[:"#{type}_key_path"]
+        content = File.read(@opt[:"#{type}_key_path"])
+        if content.include?("#{type.to_s.upcase} KEY")
           content
         else
-          ssh_key_to_pem(@opt[:private_key_path])
+          ssh_key_to_pem(@opt[:"#{type}_key_path"])
         end
       else
-        raise self.class::Error, "No private key content"
-      end
-    end
-
-    def public_key_content
-      if @opt[:public_key_content]
-        @opt[:public_key_content]
-      elsif @opt[:public_key_path]
-        content = File.read(@opt[:public_key_path])
-        if content.include?("PUBLIC KEY")
-          content
-        else
-          ssh_key_to_pem(@opt[:public_key_path])
-        end
-      else
-        raise self.class::Error, "No public key content"
+        raise Cript::Cripter::Error, "No #{type} key content"
       end
     end
 

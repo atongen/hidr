@@ -1,8 +1,8 @@
 #
-# Cript::EHash
+# Cript::Hash
 #
 module Cript
-  # A hash backed by a Cript::EStore object.
+  # A hash backed by a Cript::Store object.
   # All methods sent to an instance of this object are
   # wrapped in a transaction and executed immediately.
   class EHash
@@ -11,23 +11,23 @@ module Cript
     KEY = :data
 
     def initialize(file, options = {})
-      @estore = EStore.new(file, options)
-      @estore.transaction do
-        unless @estore[KEY].is_a?(Hash)
-          @estore[KEY] = {}
+      @store = Store.new(file, options)
+      @store.transaction do
+        unless @store[KEY].is_a?(Hash)
+          @store[KEY] = {}
         end
       end
     end
 
     def inspect
-      "#<#{self.class.name} path='#{@estore.path}'>"
+      "#<#{self.class.name} path='#{@store.path}'>"
     end
 
     def method_missing(sym, *args, &block)
       super if !METHODS.include?(sym) || block_given?
 
-      @estore.transaction do
-        @estore[KEY].send(sym, *args)
+      @store.transaction do
+        @store[KEY].send(sym, *args)
       end
     end
 
