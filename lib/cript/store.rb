@@ -11,6 +11,10 @@ module Cript
 
     # public_key_path
     # private_key_path
+    #
+    # public_key_content
+    # public_key_path
+    #
     # passphrase
     # thread_safe
     def initialize(file, options = {})
