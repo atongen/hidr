@@ -66,6 +66,9 @@ c2 = Cript::Simple.new({
 encrypted = c.encrypt("More secret stuff!")
 ```
 
+You can use Cript::Simple from bash with the `cript` executable.
+Type `cript --help` after gem installation for usage.
+
 ### Cript::Hidr
 
 The Hidr class allows you to obscure strings in other strings by facilitating a two-way conversion
@@ -82,6 +85,9 @@ After running this code, result will contain "zzzazazazzzzazzazzzazzzazaaaazaa".
 
 It comes with a few commonly used mappings already setup: ascii, unicode, orly.
 Call the class method of the same name to get these hidrs.
+
+You can use Cript::Hidr from bash with the `hidr` executable.
+Type `hidr --help` after gem installation for usage.
 
 ## Contributing
 
