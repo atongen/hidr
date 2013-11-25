@@ -8,9 +8,11 @@ module Cript
   class Hidr
 
     CHARS = {
+      binary:  ["0", "1"],
       ascii:   ["\s","\t"],
       unicode: ["\u200B","\uFEFF"],
-      orly:    ["\u0CA0", "\u005F"]
+      orly:    ["\u0CA0", "\u005F"],
+      niceday: ["\s", "\u263A"]
     }
 
     class << self
