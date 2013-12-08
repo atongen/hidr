@@ -35,7 +35,20 @@ After running this code, result will contain "zzzazazazzzzazzazzzazzzazaaaazaa".
 It comes with a few commonly used mappings already setup: ascii, unicode, orly.
 Call the class method of the same name to get these hidrs.
 
-You can use Hidr from bash with the `hidr` executable.
+You can use Hidr from bash with the `hidr` executable. For example:
+
+```
+% echo Some important stuff | bin/hidr -h
+110010101111011010110110101001100000010010010110101101100000111011110110010011100010111010000110011101100010111000000100110011100010111010101110011001100110011001010000
+```
+
+or even
+
+```
+% echo Some important stuff | bin/hidr -h | bin/hidr -s
+Some important stuff
+```
+
 Type `hidr --help` after gem installation for usage.
 
 ## Contributing

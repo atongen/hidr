@@ -89,7 +89,7 @@ module Hidr
           exit 1
         end
       else
-        Hidr::Hidr.new(b0: @options[:b0], b1: @options[:b1])
+        ::Hidr::Hidr.new(b0: @options[:b0], b1: @options[:b1])
       end
     end
 
