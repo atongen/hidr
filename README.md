@@ -2,6 +2,7 @@
 
 Hide your strings!
 
+[![Gem Version](https://badge.fury.io/rb/hidr.png)](http://badge.fury.io/rb/hidr)
 [![Build Status](https://travis-ci.org/atongen/hidr.png)](https://travis-ci.org/atongen/hidr)
 
 ## Installation
