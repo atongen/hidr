@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'cript/version'
+require 'hidr/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "cript"
-  spec.version       = Cript::VERSION
+  spec.name          = "hidr"
+  spec.version       = Hidr::VERSION
   spec.authors       = ["Andrew Tongen"]
   spec.email         = ["atongen@gmail.com"]
-  spec.description   = %q{Simple Encryption Tools for Ruby}
-  spec.summary       = %q{Simple Encryption Tools for Ruby}
-  spec.homepage      = "https://github.com/atongen/cript"
+  spec.description   = %q{Hide your strings!}
+  spec.summary       = %q{Convert strings to and from a binary representation}
+  spec.homepage      = "https://github.com/atongen/hidr"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)

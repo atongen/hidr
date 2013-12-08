@@ -1,7 +1,7 @@
-require 'cript'
+require 'hidr'
 require 'optparse'
 
-module Cript
+module Hidr
   class HidrCommand
 
     attr_reader :options
@@ -50,7 +50,7 @@ module Cript
         opts.separator "Bits:"
         opts.on("-0", "--zero CHAR", "zero char (default: '#{@options[:b0]}')") { |char| @options[:b0] = char }
         opts.on("-1", "--one CHAR", "one char (default: '#{@options[:b1]}')") { |char| @options[:b1] = char }
-        opts.on("-b", "--builtin BUILTIN", "built-in binary set (overrides zero and one, options: #{Cript::Hidr::CHARS.keys.join(', ')})") { |builtin| @options[:builtin] = builtin.to_s.strip.to_sym }
+        opts.on("-b", "--builtin BUILTIN", "built-in binary set (overrides zero and one, options: #{::Hidr::CHARS.keys.join(', ')})") { |builtin| @options[:builtin] = builtin.to_s.strip.to_sym }
 
         opts.separator ""
         opts.separator "Files:"
@@ -63,7 +63,7 @@ module Cript
 
         opts.on_tail("-D", "--debug", "Set debugging on") { @options[:debug] = true }
         opts.on_tail("-H", "--help", "Show this message") { puts opts; exit }
-        opts.on_tail('-v', '--version', "Show version") { puts Cript::VERSION; exit }
+        opts.on_tail('-v', '--version', "Show version") { puts Hidr::VERSION; exit }
       end
     end
 
@@ -82,14 +82,14 @@ module Cript
 
     def build_hidr
       if @options[:builtin]
-        if Cript::Hidr::CHARS.keys.include?(@options[:builtin])
-          Cript::Hidr.send(@options[:builtin])
+        if ::Hidr::CHARS.keys.include?(@options[:builtin])
+          ::Hidr.send(@options[:builtin])
         else
           STDERR.puts "Invalid builtin: #{@options[:builtin]}"
           exit 1
         end
       else
-        Cript::Hidr.new(b0: @options[:b0], b1: @options[:b1])
+        Hidr::Hidr.new(b0: @options[:b0], b1: @options[:b1])
       end
     end
 

@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
 
-require 'cript'
+require 'hidr'
 require 'securerandom'
 
 RSpec.configure do |config|

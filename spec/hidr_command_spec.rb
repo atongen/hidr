@@ -1,37 +1,49 @@
 require 'spec_helper'
-require 'cript/hidr_command'
+require 'hidr/hidr_command'
 
-describe Cript::HidrCommand do
+describe Hidr::HidrCommand do
+
+  subject(:cmd) { Hidr::HidrCommand.new(args.split(" ")) }
+  let(:args) { nil }
 
   context 'parse' do
-    it 'should parse hide options' do
-      c = Cript::HidrCommand.new("-h -0 a -1 b -i /tmp/in.txt -o /tmp/out.txt -f -D".split(" "))
-      c.options[:mode].should eql('hide')
-      c.options[:b0].should eql('a')
-      c.options[:b1].should eql('b')
-      c.options[:infile].should eql('/tmp/in.txt')
-      c.options[:outfile].should eql('/tmp/out.txt')
-      c.options[:force].should be_true
-      c.options[:debug].should be_true
+    context 'hide' do
+      let(:args) { "-h -0 a -1 b -i /tmp/in.txt -o /tmp/out.txt -f -D" }
+
+      it 'should parse hide options' do
+        cmd.options[:mode].should eql('hide')
+        cmd.options[:b0].should eql('a')
+        cmd.options[:b1].should eql('b')
+        cmd.options[:infile].should eql('/tmp/in.txt')
+        cmd.options[:outfile].should eql('/tmp/out.txt')
+        cmd.options[:force].should be_true
+        cmd.options[:debug].should be_true
+      end
     end
 
-    it 'should parse show options' do
-      c = Cript::HidrCommand.new("-s -0 a -1 b -i /tmp/in.txt -o /tmp/out.txt -f -D".split(" "))
-      c.options[:mode].should eql('show')
-      c.options[:b0].should eql('a')
-      c.options[:b1].should eql('b')
-      c.options[:infile].should eql('/tmp/in.txt')
-      c.options[:outfile].should eql('/tmp/out.txt')
-      c.options[:force].should be_true
-      c.options[:debug].should be_true
+    context 'show' do
+      let(:args) { "-s -0 a -1 b -i /tmp/in.txt -o /tmp/out.txt -f -D" }
+
+      it 'should parse show options' do
+        cmd.options[:mode].should eql('show')
+        cmd.options[:b0].should eql('a')
+        cmd.options[:b1].should eql('b')
+        cmd.options[:infile].should eql('/tmp/in.txt')
+        cmd.options[:outfile].should eql('/tmp/out.txt')
+        cmd.options[:force].should be_true
+        cmd.options[:debug].should be_true
+      end
     end
 
-    it 'should recognize built-in hidrs' do
-      c = Cript::HidrCommand.new("-s -b orly -i /tmp/in.txt -o /tmp/out.txt -f -D".split(" "))
-      hidr = c.send(:build_hidr)
-      opts = hidr.instance_variable_get(:@o)
-      opts[:b0].should eql("\u0CA0")
-      opts[:b1].should eql("\u005F")
+    context 'builtin' do
+      let(:args) { "-s -b orly -i /tmp/in.txt -o /tmp/out.txt -f -D" }
+
+      it 'should recognize built-in hidrs' do
+        hidr = cmd.send(:build_hidr)
+        opts = hidr.instance_variable_get(:@o)
+        opts[:b0].should eql("\u0CA0")
+        opts[:b1].should eql("\u005F")
+      end
     end
   end
 end
